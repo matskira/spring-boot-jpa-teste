@@ -1,10 +1,13 @@
 package io.github.matskira.domain.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,9 +18,12 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "nome", length = 100)
 	private String nome;
+
+	@OneToMany(mappedBy = "cliente")
+	private Set<Pedido> pedidos;
 
 	public Cliente() {
 	}
@@ -29,6 +35,14 @@ public class Cliente {
 	public Cliente(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
+	}
+
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	public Integer getId() {
