@@ -32,7 +32,11 @@ public class VendasApplication {
 			});
 			
 			System.out.println("PROCURANDO CLIENTES");
-			clienteRep.findByNomeLike("Cost").forEach(System.out::println);
+			//No caso ao colocar o Contains, ele busca na base qualquer nome que tenha os caracteres e não o específico
+			clienteRep.findByNomeContains("Amanda").forEach(System.out::println);
+			
+			boolean existe = clienteRep.existsByNome("Amanda Costa ATUALIZADO");
+			System.out.println("Existe alguém com o nome Amanda? "+existe);
 			
 			System.out.println("DELETANDO CLIENTES");
 			clienteRep.findAll().forEach(c -> {
